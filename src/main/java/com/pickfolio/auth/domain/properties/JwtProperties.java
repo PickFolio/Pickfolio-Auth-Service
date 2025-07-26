@@ -12,8 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @NoArgsConstructor
 public class JwtProperties {
-    private String accessTokenSecret;
+    private String secret;
     private Long accessTokenExpiryTime;
-    private String refreshTokenSecret;
     private Long refreshTokenExpiryTime;
 }

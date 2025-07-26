@@ -1,38 +1,41 @@
 package com.pickfolio.auth.security.config;
 
-import com.pickfolio.auth.security.JwtAuthenticationFilter;
+import com.pickfolio.auth.exception.JwtAuthEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthFilter;
-    private final AuthenticationEntryPoint jwtAuthEntryPoint;
-
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, AuthenticationEntryPoint jwtAuthEntryPoint) {
-        this.jwtAuthFilter = jwtAuthFilter;
-        this.jwtAuthEntryPoint = jwtAuthEntryPoint;
-    }
+    private final AuthenticationProvider authenticationProvider;
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
 
     @Bean
+    @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .authorizeHttpRequests(auth -> auth
+                        // Public endpoints for registration, login, and token refresh
                         .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/refresh").permitAll()
+                        // All other requests must be authenticated
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthEntryPoint));
-
-        return http.build();
+                .build();
     }
 }

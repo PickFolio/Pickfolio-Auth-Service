@@ -5,6 +5,7 @@ import com.pickfolio.auth.domain.request.LogoutRequest;
 import com.pickfolio.auth.domain.request.RefreshRequest;
 import com.pickfolio.auth.domain.request.RegisterRequest;
 import com.pickfolio.auth.domain.response.LoginResponse;
+import org.springframework.security.core.Authentication;
 
 public interface UserService {
 
@@ -16,5 +17,5 @@ public interface UserService {
 
     void logoutUser(LogoutRequest request);
 
-    void logoutUserFromAllDevices(LogoutRequest request);
+    void logoutUserFromAllDevices(Authentication authentication);
 }

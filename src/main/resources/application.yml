@@ -14,8 +14,13 @@ spring:
         format_sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+    security:
+      oauth2:
+        resourceserver:
+          jwt:
+            jwk-set-uri: "http://localhost:8080/oauth2/jwks"
+
 jwt:
-  accessTokenSecret: ${JWT_SECRET:defaultSecret}
   accessTokenExpiryTime: 600000 # in milliseconds (10 minutes)
-  refreshTokenSecret: ${JWT_REFRESH_SECRET:defaultRefreshSecret}
   refreshTokenExpiryTime: 604800000  # in milliseconds (7days)
+  secret: ${JWT_SECRET:your-default-secret} # Use an environment variable or default value

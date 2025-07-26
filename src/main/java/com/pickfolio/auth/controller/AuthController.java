@@ -7,8 +7,10 @@ import com.pickfolio.auth.domain.request.RegisterRequest;
 import com.pickfolio.auth.domain.response.LoginResponse;
 import com.pickfolio.auth.service.UserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final UserService userService;
-
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@Valid @RequestBody RegisterRequest request) {
@@ -39,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<LoginResponse> refreshTokens(@Valid @RequestBody RefreshRequest request) {
+    public ResponseEntity<LoginResponse> refreshToken(@Valid @RequestBody RefreshRequest request) {
         LoginResponse newAccessToken = userService.refreshAccessToken(request);
         return ResponseEntity.status(HttpStatus.OK).body(newAccessToken);
     }
@@ -51,9 +50,8 @@ public class AuthController {
     }
 
     @PostMapping("/logout-all")
-    public ResponseEntity<Void> logoutAll(@RequestBody LogoutRequest request) {
-        userService.logoutUserFromAllDevices(request);
+    public ResponseEntity<Void> logoutAll(Authentication authentication) {
+        userService.logoutUserFromAllDevices(authentication);
         return ResponseEntity.ok().build();
     }
-
 }
