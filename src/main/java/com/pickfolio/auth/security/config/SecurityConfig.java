@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
+import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -29,7 +31,10 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                .oauth2ResourceServer(
+                        oauth2 -> oauth2.jwt(Customizer.withDefaults())
+                                .authenticationEntryPoint(jwtAuthEntryPoint)
+                )
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints for registration, login, and token refresh
                         .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/refresh").permitAll()

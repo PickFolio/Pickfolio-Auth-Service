@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
                             logger.info("User logged out, refresh token invalidated: {}", token.getToken());
                         },
                         () -> {
-                            logger.warn("Logout attempted with non-existing token: {}", request.getRefreshToken());
+                            logger.warn("Logout attempted with non-existing refresh token: {}", request.getRefreshToken());
                             // Silently ignore to prevent token enumeration attacks.
                         }
                 );
