@@ -39,8 +39,8 @@ public class SecurityConfig {
                                 .authenticationEntryPoint(jwtAuthEntryPoint)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        // Public endpoints for registration, login, and token refresh
-                        .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/refresh").permitAll()
+                        // Public endpoints for registration, login, token refresh and logout
+                        .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/refresh", "/api/auth/logout").permitAll()
                         // All other requests must be authenticated
                         .anyRequest().authenticated()
                 )
