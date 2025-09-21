@@ -8,7 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -24,3 +24,8 @@ jwt:
   accessTokenExpiryTime: 600000 # in milliseconds (10 minutes)
   refreshTokenExpiryTime: 604800000  # in milliseconds (7days)
   secret: ${JWT_SECRET:your-default-secret} # Use an environment variable or default value
+
+logging:
+  level:
+    org.hibernate.SQL: off
+    org.hibernate.type.descriptor.sql.BasicBinder: off
