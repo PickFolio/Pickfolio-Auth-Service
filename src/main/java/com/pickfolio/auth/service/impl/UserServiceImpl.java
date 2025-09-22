@@ -8,6 +8,7 @@ import com.pickfolio.auth.domain.request.LogoutRequest;
 import com.pickfolio.auth.domain.request.RefreshRequest;
 import com.pickfolio.auth.domain.request.RegisterRequest;
 import com.pickfolio.auth.domain.response.LoginResponse;
+import com.pickfolio.auth.domain.response.UserDetailResponse;
 import com.pickfolio.auth.exception.InvalidCredentialsException;
 import com.pickfolio.auth.exception.UsernameAlreadyExistsException;
 import com.pickfolio.auth.repository.RefreshTokenRepository;
@@ -27,7 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -151,6 +154,14 @@ public class UserServiceImpl implements UserService {
         refreshToken.setExpiryDate(Instant.now().plusMillis(jwtProperties.getRefreshTokenExpiryTime()));
         refreshToken.setDeviceInfo(deviceInfo);
         return refreshTokenRepository.save(refreshToken);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserDetailResponse> findUserDetailsByIds(List<UUID> userIds) {
+        return userRepository.findAllByIdIn(userIds).stream()
+                .map(user -> new UserDetailResponse(user.getId(), user.getUsername()))
+                .collect(Collectors.toList());
     }
 
 }
