@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e2b47ee-7de8-4c1b-a0b4-5c1be226033d" name="Changes" comment="Allow public access to logout endpoint in security configuration">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/controller/InternalUserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/domain/response/UserDetailResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pickfolio/auth/service/impl/UserServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="0e2b47ee-7de8-4c1b-a0b4-5c1be226033d" name="Changes" comment="Add InternalUserController and UserDetailResponse for fetching user details by IDs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -237,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758475680523</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add InternalUserController and UserDetailResponse for fetching user details by IDs">
+      <option name="closed" value="true" />
+      <created>1758556023814</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1758556023814</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -272,6 +272,7 @@
     <MESSAGE value="Enhance security configuration by adding custom authentication entry points for OAuth2 resource server and improve logout logging message" />
     <MESSAGE value="Configure CORS settings in SecurityConfig and disable SQL logging in application.yml" />
     <MESSAGE value="Allow public access to logout endpoint in security configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Allow public access to logout endpoint in security configuration" />
+    <MESSAGE value="Add InternalUserController and UserDetailResponse for fetching user details by IDs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add InternalUserController and UserDetailResponse for fetching user details by IDs" />
   </component>
 </project>
