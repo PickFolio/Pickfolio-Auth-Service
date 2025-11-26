@@ -51,7 +51,8 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // This is the address of running frontend
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:3000", "http://192.168.*.*:3000", "http://10.*.*.*:3000"));
+        // configuration.setAllowedOriginPatterns(List.of("http://localhost:3000", "http://192.168.*.*:3000", "http://10.*.*.*:3000"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
