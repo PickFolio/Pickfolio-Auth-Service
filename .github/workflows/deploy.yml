@@ -59,7 +59,7 @@ jobs:
             --exclude '.gradle/' \
             --exclude '.idea/' \
             --exclude 'build/' \
-            ./ "oracle-vm:${REMOTE_DIR// /\\ }/"
+            ./ "oracle-vm:${REMOTE_DIR}/"
 
       - name: Rebuild and restart auth-service
         env:
@@ -82,5 +82,6 @@ jobs:
             fi
             \$COMPOSE build auth-service
             \$COMPOSE up -d --no-deps auth-service
+            \$COMPOSE restart pickfolio-ui
             docker image prune -f
           "
