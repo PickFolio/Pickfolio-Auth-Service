@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<UserDetailResponse> findUserDetailsByIds(List<UUID> userIds) {
         return userRepository.findAllByIdIn(userIds).stream()
-                .map(user -> new UserDetailResponse(user.getId(), user.getUsername()))
+                .map(user -> new UserDetailResponse(user.getId(), user.getUsername(), user.isBot(), user.getPersonaType()))
                 .collect(Collectors.toList());
     }
 
@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<UserDetailResponse> findAllBots() {
         return userRepository.findByIsBotTrue().stream()
-                .map(user -> new UserDetailResponse(user.getId(), user.getUsername()))
+                .map(user -> new UserDetailResponse(user.getId(), user.getUsername(), user.isBot(), user.getPersonaType()))
                 .collect(Collectors.toList());
     }
 
