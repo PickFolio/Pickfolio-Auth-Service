@@ -164,4 +164,12 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserDetailResponse> findAllBots() {
+        return userRepository.findByIsBotTrue().stream()
+                .map(user -> new UserDetailResponse(user.getId(), user.getUsername()))
+                .collect(Collectors.toList());
+    }
+
 }

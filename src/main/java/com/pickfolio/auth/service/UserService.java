@@ -24,4 +24,6 @@ public interface UserService {
     void logoutUserFromAllDevices(Authentication authentication);
 
     List<UserDetailResponse> findUserDetailsByIds(List<UUID> userIds);
+
+    List<UserDetailResponse> findAllBots();
 }

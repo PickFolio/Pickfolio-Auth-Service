@@ -20,4 +20,9 @@ public class InternalUserController {
     public ResponseEntity<List<UserDetailResponse>> getUserDetails(@RequestBody List<UUID> userIds) {
         return ResponseEntity.ok(userService.findUserDetailsByIds(userIds));
     }
+
+    @GetMapping("/bots")
+    public ResponseEntity<List<UserDetailResponse>> getAllBots() {
+        return ResponseEntity.ok(userService.findAllBots());
+    }
 }
