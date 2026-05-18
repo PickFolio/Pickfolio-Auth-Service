@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "is_bot", nullable = false)
+    @Column(name = "is_bot", nullable = false, columnDefinition = "boolean default false")
     @Builder.Default
     private boolean isBot = false;
 
