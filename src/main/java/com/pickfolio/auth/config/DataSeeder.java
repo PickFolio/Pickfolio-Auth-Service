@@ -24,6 +24,7 @@ public class DataSeeder implements CommandLineRunner {
         seedBot("warren_bot", "WarrenBot \uD83E\uDD16", "VALUE");
         seedBot("chad_bot", "ChadBot \uD83E\uDD16", "WSB_YOLO");
         seedBot("quant_bot", "QuantBot \uD83E\uDD16", "MOMENTUM");
+        seedBot("analyst_bot", "AnalystBot \uD83E\uDD16", "AI_ANALYST");
         log.info("Data seeding completed.");
     }
 
