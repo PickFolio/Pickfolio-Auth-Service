@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     List<User> findAllByIdIn(List<UUID> ids);
 
+    List<User> findByIsBotTrue();
+
 }

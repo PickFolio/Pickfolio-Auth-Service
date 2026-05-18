@@ -39,6 +39,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "is_bot", nullable = false)
+    @Builder.Default
+    private boolean isBot = false;
+
+    @Column(name = "persona_type")
+    private String personaType;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
